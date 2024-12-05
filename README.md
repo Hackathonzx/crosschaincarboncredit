@@ -1,49 +1,132 @@
-# BNBPropertyLink
+Carbon Credit Interoperability Platform
+Overview
+The Carbon Credit Interoperability Platform is a decentralized infrastructure for tokenizing, trading, and transferring carbon credits across Avalanche blockchain subnets. Leveraging Avalanche's Interchain Messaging Protocol (ICM) and a suite of purpose-built smart contracts, the platform enhances the scalability and interoperability of carbon credit systems in a multichain ecosystem.
 
-BNBPropertyLink is a blockchain-based platform for transparent and efficient real estate transactions. Built on the opBNB Testnet, it enables fractional ownership, programmable property rights, and transparent transaction histories.
+Project Vision
+To facilitate a seamless, transparent, and scalable marketplace for carbon credits by leveraging blockchain interoperability, thereby advancing global sustainability efforts.
 
-# Overview
-# Key Features
-- Mint Property NFTs: Tokenize property ownership as NFTs, ensuring secure and tamper-proof records.
-- Fractional Ownership: Support multiple owners with programmable ownership percentages.
-- Rental Income Distribution: Efficiently distribute rental income to property stakeholders.
-- Transparency: Provide immutable transaction history on the blockchain.
-- Scalability: Designed for integration with government registries and future multi-chain expansion.
+Key Features
+Carbon Credit Tokenization
 
-# Smart Contract Overview
-The project uses three main smart contracts to handle different functionalities:
+Carbon credits are tokenized as ERC20 tokens, enabling standardized trading and tracking.
+Decentralized Marketplace
 
-**1. FractionalOwnership:**
-- Manages fractional ownership of properties.
-- Allows issuing shares, voting on decisions, and tracking governance votes.
+A robust platform for listing, buying, and selling carbon credits with dynamic price updates through oracles.
+Cross-Chain Transfers
 
-**Key Functions**:
-- issueShare(uint256 propertyId, address to, uint256 percentage): Issues fractional ownership.
-- voteOnDecision(uint256 propertyId, string memory decision): Enables governance voting.
-- getPropertyShares(uint256 propertyId): Retrieves ownership shares.
+Enables users to transfer carbon credits between Avalanche subnets using the Interchain Messaging Protocol (ICM).
+Oracle Integration
 
-**2. PropertyNFT:**
-- Tokenizes real estate as ERC721 NFTs.
-- Allows minting properties and updating property values.
+Real-time pricing and market data updates via Avalanche-native ICTT oracles.
+Modular and Scalable Architecture
 
-**Key Functions:**
-- mintProperty(address to, uint256 value, string memory metadata): Mints a new property NFT.
-- updatePropertyValue(uint256 tokenId, uint256 newValue): Updates the valuation of a property.
+Built to adapt and scale across additional blockchain environments, ensuring flexibility for future enhancements.
+Smart Contracts
+CarbonCredit.sol
 
-**3. TransactionHandler:**
-- Handles payments and rental income distribution among fractional owners.
-- Registers ownership and calculates income shares.
+Purpose: Tokenizes carbon credits as ERC20 tokens.
+Features: Minting, burning, and transferring tokens.
+Marketplace.sol
 
-**Key Functions:**
-- distributeRentalIncome(uint256 propertyId): Distributes rental income to owners.
-- registerOwner(uint256 propertyId, address owner, uint256 percentage): Registers a fractional owner.
-- getOwners(uint256 propertyId): Retrieves all owners of a property.
+Purpose: Decentralized trading marketplace for carbon credits.
+Features:
+Listing and purchasing carbon credits.
+Price tracking using an ICTT oracle.
+ICMHandler.sol
 
-# Setup Instructions
-**Prerequisites**
-- Node.js v16+.
-- Hardhat development environment installed globally.
-- Access to the opBNB Testnet with a funded wallet.
+Purpose: Handles all cross-chain messaging for carbon credit transfers.
+Features:
+Encoding, relaying, and execution of ICM messages.
+Minting tokens on target chains after successful cross-chain transfers.
+PriceOracle.sol
+
+Purpose: Updates real-time prices of carbon credits using Avalanche-native oracle services.
+Technologies Used
+Blockchain: Avalanche Subnets
+Smart Contract Language: Solidity
+Tools & Frameworks:
+Hardhat (development and testing)
+OpenZeppelin (contract security and standards)
+Avalanche ICM (Interchain Messaging Protocol)
+Deployment Guide
+Prerequisites
+
+Node.js installed
+Hardhat installed globally or in your project
+Avalanche network wallet and RPC configuration
+Deployment Steps
+
+Install dependencies:
+
+bash
+Copy code
+npm install
+Compile contracts:
+
+bash
+Copy code
+npx hardhat compile
+Deploy contracts:
+
+bash
+Copy code
+npx hardhat run scripts/deploy.js --network <network>
+Replace <network> with the desired network (e.g., fuji or mainnet).
+
+Note down the deployed contract addresses for CarbonCredit, Marketplace, and ICMHandler.
+
+How to Use the Platform
+Tokenize Carbon Credits
+Use the mint function in CarbonCredit.sol to create new carbon credit tokens.
+Burn tokens via the burn function to account for used credits.
+Trade Carbon Credits
+Sellers list carbon credits for sale via the listCredit function in Marketplace.sol.
+Buyers purchase credits using the buyCredit function.
+Transfer Credits Cross-Chain
+Initiate a cross-chain transfer using transferCredit in ICMHandler.sol.
+The ICM Router relays messages to mint tokens on the target chain.
+Testing
+Run unit tests for all smart contracts:
+
+bash
+Copy code
+npx hardhat test
+Verify the following functionalities:
+
+Carbon credit minting, burning, and transferring.
+Marketplace listing and buying.
+Cross-chain transfer of tokens.
+Future Enhancements
+Multi-Chain Expansion
+
+Integrate with non-Avalanche blockchains using additional cross-chain protocols.
+Reputation System
+
+Implement user reputation tracking for sellers to enhance marketplace reliability.
+Dynamic Pricing Algorithms
+
+Incorporate machine learning for better price forecasting based on market trends.
+Decentralized Governance
+
+Introduce DAO-like mechanisms for carbon credit allocation and policy-making.
+Target Audience
+Environmental organizations and carbon offset providers.
+Businesses seeking transparent carbon credit systems.
+Developers and users in blockchain-based sustainability initiatives.
+Contributing
+We welcome contributions from developers and environmental advocates. Please submit pull requests or open issues on the repository to propose changes or enhancements.
+
+Contact
+For inquiries or collaboration, contact [Your Name/Organization] at [Your Email Address].
+
+
+priceOracle - 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD // avax/usd
+
+ICM Router deployed to: 0xe9dE092AAfEEF452EA20f84816D96598cD5023c2
+CarbonCredit deployed to: 0xd52D2CA7975Cfbc3342863A1B76d21104a5C8266
+ICMHandler deployed to: 0x41b5Cc57269f5E2AC278B860373a812f527daE7a
+Marketplace deployed to: 0xaC41d927189A00f92133EF6c56f447058FD4ed58
+
 
 **Installation**
 - Clone the repository:
