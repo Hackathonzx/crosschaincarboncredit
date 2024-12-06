@@ -6,7 +6,7 @@ describe("Carbon Credit Platform", function () {
   let CarbonCredit, carbonCredit;
   let Marketplace, marketplace;
   let ICMHandler, icmHandler;
-  let icmRouterAddress = "0xe9dE092AAfEEF452EA20f84816D96598cD5023c2"; // Mock address for testing
+  let icmRouterAddress = "0xe9dE092AAfEEF452EA20f84816D96598cD5023c2";
 
   beforeEach(async function () {
     [owner, user1, user2] = await ethers.getSigners();

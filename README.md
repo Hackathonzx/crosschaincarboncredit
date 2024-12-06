@@ -105,6 +105,4 @@ We welcome contributions from developers and environmental advocates. Please sub
 - Developer: uthman fatima
 - Email: futhmah456@gmail.com
 - GitHub: https://github.com/Jumcee
-- Twitter: 
 
-priceOracle - 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD // avax/usd
