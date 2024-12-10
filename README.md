@@ -82,9 +82,9 @@ Run unit tests for all smart contracts:
 
 Verify the following functionalities:
 
-Carbon credit minting, burning, and transferring.
-Marketplace listing and buying.
-Cross-chain transfer of tokens.
+- Carbon credit minting, burning, and transferring.
+- Marketplace listing and buying.
+- Cross-chain transfer of tokens.
 
 # Future Enhancements
 - Multi-Chain Expansion: Integrate with non-Avalanche blockchains using additional cross-chain protocols.
@@ -105,4 +105,5 @@ We welcome contributions from developers and environmental advocates. Please sub
 - Developer: uthman fatima
 - Email: futhmah456@gmail.com
 - GitHub: https://github.com/Jumcee
+- twitter project link: https://x.com/futhmah456/status/1866591024623022507
 
