@@ -105,5 +105,3 @@ We welcome contributions from developers and environmental advocates. Please sub
 - Developer: uthman fatima
 - Email: futhmah456@gmail.com
 - GitHub: https://github.com/Jumcee
-- twitter project link: https://x.com/futhmah456/status/1866591024623022507
-
