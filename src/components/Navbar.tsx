@@ -24,7 +24,7 @@ const Navbar = ({ onConnectWallet, connectedWallet }: NavbarProps) => {
       </div>
 
       <div className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-        <a href="">Home</a>
+        <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/marketplace">Marketplace</a>
         <a href="/documentation">Documentation</a>
