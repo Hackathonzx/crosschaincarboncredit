@@ -1,6 +1,7 @@
 import { FC, useRef } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 const HeroContainer = styled.section`
   min-height: 100vh;
@@ -65,6 +66,7 @@ interface HeroSectionProps {
 
 const HeroSection: FC<HeroSectionProps> = ({ onExploreClick, children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -107,7 +109,7 @@ const HeroSection: FC<HeroSectionProps> = ({ onExploreClick, children }) => {
           animate="visible"
           variants={contentVariants}
           transition={{ delay: 0.4 }}
-          onClick={onExploreClick}
+          onClick={() => router.push('/documentation')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
