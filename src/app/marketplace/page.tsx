@@ -1,12 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import styles from '@/styles/MarketplacePage.module.css';
+import styles from '@/styles/LandingPage.module.css';
 
 const MarketplacePage = () => {
+  const [isWalletOverlayOpen, setWalletOverlayOpen] = useState(false);
+
   return (
     <div className={styles.container}>
-      <Navbar theme="natural" />
+      <Navbar onConnect={() => setWalletOverlayOpen(true)} />
       <div className={styles.content}>
         <h1 className={styles.title}>Marketplace</h1>
         <div className={styles.cards}>
