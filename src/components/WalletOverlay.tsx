@@ -54,12 +54,9 @@ const WalletOverlay = ({ onClose, onConnect }: WalletOverlayProps) => (
             </button>
           ))}
         </div>
-            ))}
-          </div>
-        </motion.div>
       </motion.div>
-    </AnimatePresence>
-  );
-};
+    </motion.div>
+  </AnimatePresence>
+);
 
 export default WalletOverlay;
