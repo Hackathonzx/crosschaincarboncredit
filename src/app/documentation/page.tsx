@@ -39,7 +39,7 @@ const DocumentationPage = () => {
               ))}
             </div>
 
-            <a href="https://github.com/your-repo" 
+            <a href="https://github.com/Hackathonzx/crosschaincarboncredit" 
                className="block w-full max-w-md mx-auto text-center px-8 py-4 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 transform hover:-translate-y-1">
               View on GitHub
             </a>
