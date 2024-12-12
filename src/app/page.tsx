@@ -10,6 +10,7 @@ import {
   useDisconnect
 } from 'wagmi';
 import Button from '@/components/shared/Button';
+import '@/types/three-types';
 
 // Components imports
 import Navbar from '@/components/Navbar';
@@ -20,13 +21,15 @@ import CarbonModel from '@/components/3d/CarbonModel';
 import WalletOverlay from '@/components/WalletOverlay';
 
 // Styles
-import styles from '../styles/LandingPage.module.css';
+import styles from '@/styles/LandingPage.module.css';
 
 // 3D Model Component
-const CarbonCreditsModel = () => {
-  const { scene } = useGLTF('/models/carbon_credits.glb');
+const CarbonCreditsModel: React.FC = () => {
+  const { scene } = useGLTF('/models/carbon_credits.glb') as { scene: Object3D };
   return <primitive object={scene} />;
 };
+
+useGLTF.preload('/models/carbon_credits.glb');
 
 const LandingPage = () => {
   const [isWalletOverlayOpen, setWalletOverlayOpen] = useState(false);
