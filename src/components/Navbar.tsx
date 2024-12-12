@@ -1,6 +1,6 @@
 // components/Navbar.tsx
 import { useState } from 'react';
-import styles from '../styles/Navbar.module.css';
+import styles from '@/styles/Navbar.module.css';
 import { motion } from 'framer-motion';
 
 interface NavbarProps {

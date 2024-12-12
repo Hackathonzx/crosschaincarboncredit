@@ -131,9 +131,10 @@ const ParticleField: FC = () => {
 
 interface HeroSectionProps {
   onExploreClick?: () => void;
+  children?: React.ReactNode;
 }
 
-const HeroSection: FC<HeroSectionProps> = ({ onExploreClick }) => {
+const HeroSection: FC<HeroSectionProps> = ({ onExploreClick, children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Animation variants for content
@@ -151,6 +152,7 @@ const HeroSection: FC<HeroSectionProps> = ({ onExploreClick }) => {
 
   return (
     <HeroContainer ref={containerRef}>
+      {children}
       <ContentContainer>
         <Title
           initial="hidden"

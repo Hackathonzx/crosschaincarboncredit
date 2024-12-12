@@ -20,7 +20,7 @@ import styles from '@/styles/LandingPage.module.css';
 
 const LandingPage = () => {
   const [isWalletOverlayOpen, setWalletOverlayOpen] = useState(false);
-  const [connectedWallet, setConnectedWallet] = useState(null);
+  const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
   const [isSignInOverlayOpen, setSignInOverlayOpen] = useState(false);
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
@@ -66,7 +66,7 @@ const LandingPage = () => {
         </div>
       )}
 
-      <HeroSection>
+      <HeroSection />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,7 +76,6 @@ const LandingPage = () => {
           <h1>Carbon Credit Interoperability Platform</h1>
           <p>Advancing global sustainability through blockchain innovation</p>
         </motion.div>
-      </HeroSection>
 
       <AboutSection>
         <motion.div
