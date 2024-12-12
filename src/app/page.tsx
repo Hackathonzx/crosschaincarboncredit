@@ -1,5 +1,7 @@
+'use client';
+
 // pages/landing-page.tsx
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment } from '@react-three/drei';
 import { motion } from 'framer-motion';
