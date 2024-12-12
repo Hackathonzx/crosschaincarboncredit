@@ -5,9 +5,10 @@ import { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment } from '@react-three/drei';
 import { motion } from 'framer-motion';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { TrustWalletConnector } from 'wagmi/connectors/trustWallet';
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
+import { 
+  useConnect,
+  useDisconnect
+} from 'wagmi';
 import Button from '@/components/shared/Button';
 
 // Components imports
@@ -31,28 +32,17 @@ const LandingPage = () => {
   const [isWalletOverlayOpen, setWalletOverlayOpen] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [isSignInOverlayOpen, setSignInOverlayOpen] = useState(false);
+  const { connect, connectors } = useConnect();
+  const { disconnect } = useDisconnect();
 
   const handleWalletConnect = async (walletType: string) => {
     try {
-      let connector;
-      switch (walletType) {
-        case 'metamask':
-          connector = new MetaMaskConnector();
-          break;
-        case 'trustwallet':
-          connector = new TrustWalletConnector();
-          break;
-        case 'coinbase':
-          connector = new CoinbaseWalletConnector({
-            options: {
-              appName: 'Carbon Credit Platform',
-            },
-          });
-          break;
-        default:
-          throw new Error('Unsupported wallet type');
+      const connector = connectors.find(c => c.id === walletType);
+      if (!connector) {
+        throw new Error('Wallet not found');
       }
-      // Connect wallet logic here
+      
+      await connect({ connector });
       setConnectedWallet(walletType);
       setWalletOverlayOpen(false);
     } catch (error) {
