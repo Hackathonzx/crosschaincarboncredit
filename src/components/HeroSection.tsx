@@ -1,59 +1,26 @@
-// components/HeroSection.tsx
-
-import { FC, useRef, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { 
-  OrbitControls, 
-  useGLTF, 
-  Environment, 
-  Float, 
-  PerspectiveCamera 
-} from '@react-three/drei';
+import { FC, useRef } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-// Define styled components for better organization
 const HeroContainer = styled.section`
   min-height: 100vh;
   width: 100%;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 5%;
-  overflow: hidden;
   background: linear-gradient(
     135deg,
     rgba(10, 25, 47, 0.95) 0%,
     rgba(17, 34, 64, 0.95) 100%
   );
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 100px 5% 50px;
-  }
 `;
 
 const ContentContainer = styled.div`
-  width: 50%;
+  max-width: 800px;
+  text-align: center;
   z-index: 2;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    text-align: center;
-  }
-`;
-
-const ModelContainer = styled.div`
-  width: 50%;
-  height: 600px;
-  position: relative;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 400px;
-    margin-top: 2rem;
-  }
 `;
 
 const Title = styled(motion.h1)`
@@ -91,44 +58,6 @@ const CTAButton = styled(motion.button)`
   }
 `;
 
-// 3D Model Component
-const CarbonCreditModel: FC = () => {
-  const { scene } = useGLTF('/models/carbon_visualization.glb');
-  
-  useEffect(() => {
-    scene.traverse((child: any) => {
-      if (child.isMesh) {
-        child.material.roughness = 0.5;
-        child.material.metalness = 0.8;
-      }
-    });
-  }, [scene]);
-
-  return (
-    <Float
-      speed={1.5}
-      rotationIntensity={1}
-      floatIntensity={2}
-    >
-      <primitive 
-        object={scene} 
-        scale={2}
-        position={[0, 0, 0]}
-      />
-    </Float>
-  );
-};
-
-// Animated Background Particles
-const ParticleField: FC = () => {
-  // Implementation of particle system
-  return (
-    <points>
-      {/* Particle system implementation */}
-    </points>
-  );
-};
-
 interface HeroSectionProps {
   onExploreClick?: () => void;
   children?: React.ReactNode;
@@ -137,7 +66,6 @@ interface HeroSectionProps {
 const HeroSection: FC<HeroSectionProps> = ({ onExploreClick, children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Animation variants for content
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -187,33 +115,6 @@ const HeroSection: FC<HeroSectionProps> = ({ onExploreClick, children }) => {
         </CTAButton>
       </ContentContainer>
 
-      <ModelContainer>
-        <Canvas>
-          <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-          <Environment preset="sunset" />
-          
-          <ambientLight intensity={0.5} />
-          <spotLight
-            position={[10, 10, 10]}
-            angle={0.15}
-            penumbra={1}
-            intensity={1}
-          />
-
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            autoRotate
-            autoRotateSpeed={0.5}
-          />
-
-          <ParticleField />
-          
-          <CarbonCreditModel />
-        </Canvas>
-      </ModelContainer>
-
-      {/* Background gradient overlay */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
