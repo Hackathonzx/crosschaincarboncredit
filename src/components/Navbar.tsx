@@ -19,7 +19,6 @@ const Navbar = ({ onConnectWallet, connectedWallet }: NavbarProps) => {
       transition={{ duration: 0.5 }}
     >
       <div className={styles.logo}>
-        <img src="/logo.svg" alt="Carbon Credits Logo" />
         <span>Carbon Credits</span>
       </div>
 
