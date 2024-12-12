@@ -6,17 +6,17 @@ import styles from '@/styles/AboutPage.module.css';
 const AboutPage = () => {
   return (
     <div className={styles.container}>
-      <Navbar />
+      <Navbar theme="natural" />
       <div className={styles.content}>
-        <h1>About Us</h1>
+        <h1 className={styles.title}>About Us</h1>
         <div className={styles.cards}>
           <div className={styles.card}>
-            <h2>Our Vision</h2>
-            <p>To facilitate a seamless, transparent, and scalable marketplace for carbon credits by leveraging blockchain interoperability, thereby advancing global sustainability efforts.</p>
+            <h2 className={styles.subtitle}>Our Vision</h2>
+            <p className={styles.text}>To facilitate a seamless, transparent, and scalable marketplace for carbon credits by leveraging blockchain interoperability, thereby advancing global sustainability efforts.</p>
           </div>
           <div className={styles.card}>
-            <h2>Key Features</h2>
-            <ul>
+            <h2 className={styles.subtitle}>Key Features</h2>
+            <ul className={styles.list}>
               <li>Carbon Credit Tokenization</li>
               <li>Decentralized Marketplace</li>
               <li>Cross-Chain Transfers</li>

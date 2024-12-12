@@ -6,7 +6,7 @@ import styles from '@/styles/DocumentationPage.module.css';
 const DocumentationPage = () => {
   return (
     <div className={styles.container}>
-      <Navbar />
+      <Navbar theme="natural" />
       <div className={styles.sidebar}>
         <ul>
           <li>Introduction</li>
@@ -17,8 +17,8 @@ const DocumentationPage = () => {
         </ul>
       </div>
       <div className={styles.content}>
-        <h1>Documentation</h1>
-        <p>Welcome to the Carbon Credit Interoperability Platform documentation. Here you will find all the information you need to get started and use our platform.</p>
+        <h1 className={styles.title}>Documentation</h1>
+        <p className={styles.text}>Welcome to the Carbon Credit Interoperability Platform documentation. Here you will find all the information you need to get started and use our platform.</p>
         <a href="https://github.com/your-repo" className={styles.githubButton}>View on GitHub</a>
       </div>
     </div>
