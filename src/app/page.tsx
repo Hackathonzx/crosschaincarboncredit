@@ -29,8 +29,6 @@ const LandingPage = () => {
 
       <HeroSection>
         <div className={styles.heroContent}>
-          <h1>Carbon Credit Interoperability Platform</h1>
-          <p>Advancing global sustainability through blockchain innovation</p>
         </div>
       </HeroSection>
 
