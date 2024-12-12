@@ -196,11 +196,13 @@
 }
 
 /* Animation Classes */
-.fadeIn {
-  animation: fadeIn 0.5s ease-in;
+.fadeInAnimation {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInLocal 0.5s ease-in forwards;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInLocal {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -209,11 +211,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Add smooth scrolling to the page */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Improve button spacing */
