@@ -37,6 +37,25 @@
   color: #00ff9d;
 }
 
+.connectButton {
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(90deg, #00ff9d, #00d4ff);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.connectButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
 /* Page Layout Styles */
 .container {
   min-height: 100vh;

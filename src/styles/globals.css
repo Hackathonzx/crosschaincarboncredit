@@ -37,3 +37,8 @@ button:hover {
   border-radius: 10px;
   text-align: center;
 }
+
+/* Add smooth scrolling to the page */
+html {
+  scroll-behavior: smooth;
+}
