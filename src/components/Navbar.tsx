@@ -37,12 +37,11 @@ const Navbar = ({ onConnectWallet, connectedWallet }: NavbarProps) => {
           </div>
         ) : (
           <>
-            <button className={styles.signInButton}>Sign In</button>
             <button 
               className={styles.connectWalletButton}
               onClick={onConnectWallet}
             >
-              Connect Wallet
+              Connect 
             </button>
           </>
         )}
