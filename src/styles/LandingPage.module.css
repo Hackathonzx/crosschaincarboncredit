@@ -1,0 +1,54 @@
+/* styles/LandingPage.module.css */
+.container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0a192f 0%, #112240 100%);
+    color: #ffffff;
+  }
+  
+  .heroContent {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+  }
+  
+  .hero3DContainer {
+    width: 100%;
+    height: 60vh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  
+  .aboutContent {
+    padding: 5rem 2rem;
+    position: relative;
+  }
+  
+  .features3DContainer {
+    height: 40vh;
+    margin: 2rem 0;
+  }
+  
+  .infoCard {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .infoCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .cardModel {
+    height: 200px;
+    margin-bottom: 1rem;
+  }
