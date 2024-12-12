@@ -24,10 +24,10 @@ const Navbar = ({ onConnectWallet, connectedWallet }: NavbarProps) => {
       </div>
 
       <div className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#marketplace">Marketplace</a>
-        <a href="#docs">Documentation</a>
+        <a href="">Home</a>
+        <a href="/about">About</a>
+        <a href="/marketplace">Marketplace</a>
+        <a href="/documentation">Documentation</a>
       </div>
 
       <div className={styles.authButtons}>
