@@ -1,17 +1,14 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import CarbonCredit from '@/contracts/CarbonCredit.json';
-import Marketplace from '@/contracts/Marketplace.json';
-import ICMHandler from '@/contracts/ICMHandler.json';
-import PriceOracle from '@/contracts/PriceOracle.json';
 
 interface CarbonCredit {
   id: number;
   name: string;
   description: string;
-  price: number;
+  price: string;
   quantity: number;
 }
 
@@ -19,10 +16,121 @@ interface Transaction {
   id: number;
   from: string;
   to: string;
-  amount: number;
-  timestamp: number;
+  amount: string;
+  timestamp: string;
 }
 
+const CarbonCredit = {
+  address: '0x...',
+  abi: [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    // ... (rest of your CarbonCredit ABI)
+  ],
+};
+
+const Marketplace = {
+  address: '0x...',
+  abi: [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "seller",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "MarketTransaction",
+      "type": "event"
+    },
+    // ... (rest of your Marketplace ABI)
+  ],
+};
+
+const ICMHandler = {
+  address: '0x...',
+  abi: [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "toAddress",
+          "type": "address"
+        }
+      ],
+      "name": "transferCredit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    // ... (rest of your ICMHandler ABI)
+  ],
+};
+
+const PriceOracle = {
+  address: '0x...',
+  abi: [
+    // ... (Your PriceOracle ABI here)
+  ],
+};
 
 export default function Dashboard() {
   const [carbonCredits, setCarbonCredits] = useState<CarbonCredit[]>([]);
@@ -30,6 +138,10 @@ export default function Dashboard() {
   const [selectedCredit, setSelectedCredit] = useState<CarbonCredit | null>(null);
   const [balance, setBalance] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [transferTo, setTransferTo] = useState('');
+  const [buyStatus, setBuyStatus] = useState('');
+  const [transferStatus, setTransferStatus] = useState('');
 
   useEffect(() => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -82,6 +194,8 @@ export default function Dashboard() {
   }, []);
 
   const handleBuyCredit = async (credit: CarbonCredit) => {
+    setIsLoading(true);
+    setBuyStatus('Buying...');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const marketplaceContract = new ethers.Contract(
@@ -93,10 +207,15 @@ export default function Dashboard() {
     const tx = await marketplaceContract.buyCredit(credit.id, {
       value: ethers.utils.parseEther(credit.price.toString()),
     });
+
     await tx.wait();
+    setIsLoading(false);
+    setBuyStatus('Credit bought successfully!');
   };
 
   const handleTransferCredit = async (credit: CarbonCredit, to: string) => {
+    setIsLoading(true);
+    setTransferStatus('Transferring...');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const icmHandlerContract = new ethers.Contract(
@@ -107,6 +226,9 @@ export default function Dashboard() {
 
     const tx = await icmHandlerContract.transferCredit(credit.id, to);
     await tx.wait();
+    setIsLoading(false);
+    setTransferStatus(`Credit transferred to ${to} successfully!`);
+    setTransferTo('');
   };
 
   return (
@@ -129,11 +251,13 @@ export default function Dashboard() {
                 <p className="text-gray-600">Price: {credit.price} ETH</p>
                 <p className="text-gray-600">Quantity: {credit.quantity}</p>
                 <button
-                  className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+                  className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                   onClick={() => handleBuyCredit(credit)}
+                  disabled={isLoading}
                 >
-                  Buy
+                  {isLoading && buyStatus === 'Buying...' ? 'Buying...' : 'Buy'}
                 </button>
+                {buyStatus && <p className="text-green-500 mt-2">{buyStatus}</p>}
               </div>
             ))}
           </div>
@@ -166,25 +290,26 @@ export default function Dashboard() {
       </div>
 
       {/* Transfer Credit */}
-      {selectedCredit && (
-        <div className="flex justify-center p-4">
-          <div className="bg-white p-4 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Transfer Credit</h2>
-            <p className="text-gray-600">Credit: {selectedCredit.name}</p>
-            <input
-              type="text"
-              placeholder="To"
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-            />
-            <button
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
-              onClick={() => handleTransferCredit(selectedCredit, '0x...')}
-            >
-              Transfer
-            </button>
-          </div>
+      <div className="flex justify-center p-4">
+        <div className="bg-white p-4 rounded-lg shadow-lg">
+          <h2 className="text-xl font-bold mb-4">Transfer Credit</h2>
+          <input
+            type="text"
+            placeholder="Recipient Address"
+            className="w-full p-2 border border-gray-300 rounded mb-4"
+            value={transferTo}
+            onChange={(e) => setTransferTo(e.target.value)}
+          />
+          <button
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+            onClick={() => handleTransferCredit(carbonCredits[0], transferTo)}
+            disabled={isLoading || !transferTo}
+          >
+            {isLoading && transferStatus === 'Transferring...' ? 'Transferring...' : 'Transfer'}
+          </button>
+          {transferStatus && <p className="text-green-500 mt-2">{transferStatus}</p>}
         </div>
-      )}
+      </div>
     </div>
   );
 }

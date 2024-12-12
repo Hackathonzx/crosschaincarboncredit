@@ -25,5 +25,6 @@
       "name": "CreditTransferred",
       "type": "event"
     }
-  ]
+  ],
+  "address": "0xYourContractAddress"
 }
