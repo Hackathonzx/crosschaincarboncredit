@@ -1,35 +1,22 @@
 'use client';
 
-// pages/landing-page.tsx
-import { useState, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Environment } from '@react-three/drei';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   useConnect,
   useDisconnect
 } from 'wagmi';
 import Button from '@/components/shared/Button';
-import '@/types/three-types';
 
 // Components imports
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import InfoCards from '@/components/InfoCards';
-import CarbonModel from '@/components/3d/CarbonModel';
 import WalletOverlay from '@/components/WalletOverlay';
 
 // Styles
 import styles from '@/styles/LandingPage.module.css';
-
-// 3D Model Component
-const CarbonCreditsModel: React.FC = () => {
-  const { scene } = useGLTF('/models/carbon_credits.glb') as { scene: Object3D };
-  return <primitive object={scene} />;
-};
-
-useGLTF.preload('/models/carbon_credits.glb');
 
 const LandingPage = () => {
   const [isWalletOverlayOpen, setWalletOverlayOpen] = useState(false);
@@ -88,16 +75,6 @@ const LandingPage = () => {
         >
           <h1>Carbon Credit Interoperability Platform</h1>
           <p>Advancing global sustainability through blockchain innovation</p>
-          
-          <div className={styles.hero3DContainer}>
-            <Canvas>
-              <Suspense fallback={null}>
-                <Environment preset="sunset" />
-                <OrbitControls enableZoom={false} />
-                <CarbonCreditsModel />
-              </Suspense>
-            </Canvas>
-          </div>
         </motion.div>
       </HeroSection>
 
@@ -110,15 +87,6 @@ const LandingPage = () => {
         >
           <h2>About Our Platform</h2>
           <p>A decentralized infrastructure for tokenizing, trading, and transferring carbon credits across Avalanche blockchain subnets.</p>
-          
-          <div className={styles.features3DContainer}>
-            <Canvas>
-              <Suspense fallback={null}>
-                <CarbonModel />
-                <OrbitControls enableZoom={false} />
-              </Suspense>
-            </Canvas>
-          </div>
         </motion.div>
       </AboutSection>
 
@@ -127,17 +95,14 @@ const LandingPage = () => {
           {
             title: "Carbon Credit Tokenization",
             description: "ERC20 tokens enabling standardized trading and tracking",
-            icon: "tokenization.glb"
           },
           {
             title: "Decentralized Marketplace",
             description: "Robust platform for listing, buying, and selling carbon credits",
-            icon: "marketplace.glb"
           },
           {
             title: "Cross-Chain Transfers",
             description: "Transfer carbon credits between Avalanche subnets",
-            icon: "transfer.glb"
           }
         ].map((card, index) => (
           <motion.div
@@ -147,15 +112,6 @@ const LandingPage = () => {
             transition={{ duration: 0.5, delay: index * 0.2 }}
             className={styles.infoCard}
           >
-            <div className={styles.cardModel}>
-              <Canvas>
-                <Suspense fallback={null}>
-                  <Environment preset="sunset" />
-                  <OrbitControls enableZoom={false} />
-                  {/* Load respective 3D model based on card */}
-                </Suspense>
-              </Canvas>
-            </div>
             <h3>{card.title}</h3>
             <p>{card.description}</p>
           </motion.div>
