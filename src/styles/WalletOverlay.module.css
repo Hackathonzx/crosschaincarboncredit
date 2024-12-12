@@ -1,4 +1,3 @@
-
 .overlay {
   position: fixed;
   top: 0;
@@ -28,11 +27,22 @@
 }
 
 .closeButton {
-  background: none;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
-  font-size: 1.5rem;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   cursor: pointer;
-  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
 }
 
 .walletList {
@@ -59,4 +69,50 @@
 .walletIcon {
   width: 32px;
   height: 32px;
+}
+
+.modal {
+  background: rgba(20, 20, 30, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.walletOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.walletButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.walletButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.walletButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.walletButton span {
+  font-size: 1.1rem;
+  font-weight: 500;
 }
