@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -132,6 +131,16 @@ const PriceOracle = {
   ],
 };
 
+const dummyCarbonCredits = [
+  { id: 1, name: 'Credit A', description: 'Description A', price: '0.1', quantity: 100 },
+  { id: 2, name: 'Credit B', description: 'Description B', price: '0.2', quantity: 200 },
+];
+
+const dummyTransactions = [
+  { id: 1, from: '0x123', to: '0x456', amount: '0.1', timestamp: '2023-01-01' },
+  { id: 2, from: '0x789', to: '0xabc', amount: '0.2', timestamp: '2023-01-02' },
+];
+
 export default function Dashboard() {
   const [carbonCredits, setCarbonCredits] = useState<CarbonCredit[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -144,53 +153,11 @@ export default function Dashboard() {
   const [transferStatus, setTransferStatus] = useState('');
 
   useEffect(() => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const carbonCreditContract = new ethers.Contract(
-      CarbonCredit.address,
-      CarbonCredit.abi,
-      signer
-    );
-    const marketplaceContract = new ethers.Contract(
-      Marketplace.address,
-      Marketplace.abi,
-      signer
-    );
-    const icmHandlerContract = new ethers.Contract(
-      ICMHandler.address,
-      ICMHandler.abi,
-      signer
-    );
-    const priceOracleContract = new ethers.Contract(
-      PriceOracle.address,
-      PriceOracle.abi,
-      signer
-    );
-
-    const fetchCarbonCredits = async () => {
-      const credits = await carbonCreditContract.getCredits();
-      setCarbonCredits(credits);
-    };
-
-    const fetchTransactions = async () => {
-      const txs = await marketplaceContract.getTransactions();
-      setTransactions(txs);
-    };
-
-    const fetchBalance = async () => {
-      const bal = await carbonCreditContract.balanceOf(signer.getAddress());
-      setBalance(bal);
-    };
-
-    const fetchPrice = async () => {
-      const price = await priceOracleContract.getPrice();
-      setPrice(price);
-    };
-
-    fetchCarbonCredits();
-    fetchTransactions();
-    fetchBalance();
-    fetchPrice();
+    // Use dummy data instead of fetching from blockchain
+    setCarbonCredits(dummyCarbonCredits);
+    setTransactions(dummyTransactions);
+    setBalance(1.0);
+    setPrice(0.1);
   }, []);
 
   const handleBuyCredit = async (credit: CarbonCredit) => {

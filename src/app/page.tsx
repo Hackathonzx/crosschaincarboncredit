@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { TrustWalletConnector } from 'wagmi/connectors/trustWallet';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
+import Button from '@/components/shared/Button';
 
 // Components imports
 import Navbar from '@/components/Navbar';
@@ -27,6 +28,7 @@ const CarbonCreditsModel = () => {
 const LandingPage = () => {
   const [isWalletOverlayOpen, setWalletOverlayOpen] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState(null);
+  const [isSignInOverlayOpen, setSignInOverlayOpen] = useState(false);
 
   const handleWalletConnect = async (walletType: string) => {
     try {
@@ -56,12 +58,31 @@ const LandingPage = () => {
     }
   };
 
+  const handleSignIn = (method: string) => {
+    // Dummy sign-in logic
+    console.log(`Signing in with ${method}`);
+    setSignInOverlayOpen(false);
+  };
+
   return (
     <div className={styles.container}>
       <Navbar 
         onConnectWallet={() => setWalletOverlayOpen(true)}
         connectedWallet={connectedWallet}
       />
+
+      <Button onClick={() => setSignInOverlayOpen(true)}>Sign In</Button>
+
+      {isSignInOverlayOpen && (
+        <div className={styles.overlay}>
+          <div className={styles.overlayContent}>
+            <h2>Sign In</h2>
+            <Button onClick={() => handleSignIn('GitHub')}>Sign in with GitHub</Button>
+            <Button onClick={() => handleSignIn('Wallet')}>Sign in with Wallet</Button>
+            <Button onClick={() => setSignInOverlayOpen(false)}>Close</Button>
+          </div>
+        </div>
+      )}
 
       <HeroSection>
         <motion.div
